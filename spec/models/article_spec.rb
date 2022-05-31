@@ -28,4 +28,14 @@ RSpec.describe Article, type: :model do
 
   end
 
+  describe '.recent' do
+    it 'returns articles in the correct order' do
+      recent_article = create(:article)
+      older_article = create(:article, created_at: 1.hour.ago)
+      expect(described_class.recent).to eq(
+                                          [recent_article,older_article]
+                                        )
+    end
+  end
+
 end
